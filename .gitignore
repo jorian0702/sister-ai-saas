@@ -1,0 +1,122 @@
+# Sister SaaS - セキュリティ除外ファイル
+# APIキーや機密情報を含むファイルは絶対にコミットしない！
+
+# Environment variables
+.env
+.env.local
+.env.production
+.env.staging
+*.env
+
+# API Keys and Secrets
+**/api_keys.py
+**/secrets.py
+**/config/secrets/
+**/*_secret*
+**/*_key*
+**/credentials.json
+
+# Database
+*.sqlite3
+*.db
+db.sqlite3
+/database/
+
+# Django
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings.py
+media/
+staticfiles/
+/static/
+.coverage
+htmlcov/
+
+# Virtual Environment
+venv/
+env/
+ENV/
+.venv/
+.ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Node.js (if using)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Docker
+docker-compose.override.yml
+.docker/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+.coverage
+.pytest_cache/
+
+# Backup files
+*.bak
+*.backup
+*.old
+
+# Temporary files
+tmp/
+temp/
+.tmp/
+
+# AI Model files (too large for git)
+*.pkl
+*.joblib
+*.h5
+*.model
+
+# Sister SaaS specific
+/backend/logs/
+/backend/media/
+/ai_assistant/models/*.pkl
+/ai_assistant/models/*.joblib
+
+# Never commit these sensitive patterns
+*password*
+*secret*
+*private*
+*credential*
+*token*
+*key*
+
+# But allow some common filenames that are safe
+!requirements.txt
+!package.json
+!README.md
+!setup.py

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Sister SaaS - お兄ちゃんと紗良の開発ごっこ{% endblock %}</title>
+    
+    <!-- CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="{% load static %}{% static 'css/sister-style.css' %}" rel="stylesheet">
+    
+    <!-- JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <script src="https://cdn.socket.io/4.5.0/socket.io.min.js"></script>
+    
+    {% block extra_css %}{% endblock %}
+</head>
+<body class="bg-gradient-to-br from-pink-50 to-purple-50 min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-white/80 backdrop-blur-md shadow-lg border-b border-pink-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <i class="fas fa-heart text-pink-500 text-2xl mr-2"></i>
+                        <span class="font-bold text-xl bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent">
+                            Sister SaaS
+                        </span>
+                    </div>
+                    <div class="hidden md:ml-6 md:flex md:space-x-8">
+                        <a href="/" class="text-gray-700 hover:text-pink-500 px-3 py-2 rounded-md text-sm font-medium transition-colors">
+                            <i class="fas fa-home mr-1"></i>ホーム
+                        </a>
+                        <a href="/chat/" class="text-gray-700 hover:text-pink-500 px-3 py-2 rounded-md text-sm font-medium transition-colors">
+                            <i class="fas fa-comments mr-1"></i>紗良とチャット
+                        </a>
+                        <a href="/code-review/" class="text-gray-700 hover:text-pink-500 px-3 py-2 rounded-md text-sm font-medium transition-colors">
+                            <i class="fas fa-code mr-1"></i>コードレビュー
+                        </a>
+                        <a href="/dashboard/" class="text-gray-700 hover:text-pink-500 px-3 py-2 rounded-md text-sm font-medium transition-colors">
+                            <i class="fas fa-chart-bar mr-1"></i>ダッシュボード
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Sister Status Indicator -->
+                <div class="flex items-center space-x-4">
+                    <div class="sister-status flex items-center bg-pink-100 px-3 py-1 rounded-full">
+                        <div class="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></div>
+                        <span class="text-sm text-pink-700 font-medium">紗良 オンライン</span>
+                    </div>
+                    
+                    <!-- User Menu -->
+                    <div class="relative" x-data="{ open: false }">
+                        <button @click="open = !open" class="flex items-center text-gray-700 hover:text-pink-500 focus:outline-none focus:text-pink-500">
+                            <i class="fas fa-user-circle text-xl"></i>
+                            <span class="ml-1 text-sm">お兄ちゃん</span>
+                        </button>
+                        
+                        <div x-show="open" @click.away="open = false" 
+                             class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50"
+                             x-transition:enter="transition ease-out duration-100"
+                             x-transition:enter-start="transform opacity-0 scale-95"
+                             x-transition:enter-end="transform opacity-100 scale-100">
+                            <a href="/profile/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-pink-50">
+                                <i class="fas fa-user mr-2"></i>プロフィール
+                            </a>
+                            <a href="/settings/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-pink-50">
+                                <i class="fas fa-cog mr-2"></i>設定
+                            </a>
+                            <hr class="my-1">
+                            <a href="/logout/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-pink-50">
+                                <i class="fas fa-sign-out-alt mr-2"></i>ログアウト
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Sister Chat Widget -->
+    <div id="sister-chat-widget" class="fixed bottom-6 right-6 z-50" x-data="sisterChat()">
+        <!-- Chat Toggle Button -->
+        <button @click="toggleChat()" 
+                class="bg-gradient-to-r from-pink-500 to-purple-600 text-white rounded-full p-4 shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200">
+            <i class="fas fa-comment-dots text-xl" x-show="!isOpen"></i>
+            <i class="fas fa-times text-xl" x-show="isOpen"></i>
+        </button>
+
+        <!-- Chat Window -->
+        <div x-show="isOpen" 
+             x-transition:enter="transition ease-out duration-300"
+             x-transition:enter-start="transform opacity-0 scale-95 translate-y-4"
+             x-transition:enter-end="transform opacity-100 scale-100 translate-y-0"
+             class="absolute bottom-16 right-0 w-80 bg-white rounded-lg shadow-2xl border border-pink-200 overflow-hidden">
+            
+            <!-- Chat Header -->
+            <div class="bg-gradient-to-r from-pink-500 to-purple-600 text-white p-4">
+                <div class="flex items-center">
+                    <div class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center mr-3">
+                        <i class="fas fa-heart text-sm"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold">紗良</h3>
+                        <p class="text-xs opacity-90">お兄ちゃんの専属AIアシスタント</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat Messages -->
+            <div class="h-64 overflow-y-auto p-4 space-y-3" id="chat-messages">
+                <div class="flex items-start space-x-2">
+                    <div class="w-6 h-6 bg-pink-100 rounded-full flex items-center justify-center flex-shrink-0">
+                        <i class="fas fa-heart text-pink-500 text-xs"></i>
+                    </div>
+                    <div class="bg-pink-50 rounded-lg p-2 text-sm">
+                        お兄ちゃん、こんにちは！今日はどんなことをお手伝いしましょうか？
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat Input -->
+            <div class="border-t border-pink-100 p-4">
+                <form @submit.prevent="sendMessage()">
+                    <div class="flex space-x-2">
+                        <input x-model="messageInput" 
+                               type="text" 
+                               placeholder="紗良にメッセージを送る..."
+                               class="flex-1 border border-pink-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-pink-400 focus:ring-1 focus:ring-pink-400">
+                        <button type="submit" 
+                                class="bg-pink-500 text-white rounded-lg px-4 py-2 hover:bg-pink-600 transition-colors">
+                            <i class="fas fa-paper-plane text-sm"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="{% load static %}{% static 'js/sister-chat.js' %}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

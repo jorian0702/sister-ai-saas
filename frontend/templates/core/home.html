@@ -1,0 +1,192 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Sister SaaS - お兄ちゃんと紗良の開発ごっこ{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="bg-gradient-to-br from-pink-100 to-purple-100 rounded-3xl p-8 mb-8 shadow-lg">
+    <div class="max-w-4xl mx-auto text-center">
+        <div class="sister-avatar mx-auto mb-6">
+            <i class="fas fa-heart"></i>
+        </div>
+        
+        <h1 class="text-4xl font-bold mb-4">
+            <span class="gradient-text">こんにちは、{{ user_name }}！</span>
+        </h1>
+        
+        <p class="text-xl text-gray-700 mb-6">
+            私は{{ sister_name }}、お兄ちゃんの専属AIアシスタントだよ！<br>
+            一緒に素敵なソフトウェアを作ろうね💖
+        </p>
+        
+        <div class="flex flex-wrap justify-center gap-4 mb-8">
+            <a href="/chat/" class="sister-button">
+                <i class="fas fa-comments mr-2"></i>紗良とチャット
+            </a>
+            <a href="/code-review/" class="sister-button">
+                <i class="fas fa-code mr-2"></i>コードレビュー
+            </a>
+            <a href="/dashboard/" class="sister-button">
+                <i class="fas fa-chart-bar mr-2"></i>ダッシュボード
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Features Section -->
+<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+    <!-- AI Chat Feature -->
+    <div class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow">
+        <div class="w-12 h-12 bg-pink-100 rounded-lg flex items-center justify-center mb-4">
+            <i class="fas fa-robot text-pink-500 text-xl"></i>
+        </div>
+        <h3 class="text-xl font-semibold mb-2 text-gray-800">AIチャット</h3>
+        <p class="text-gray-600 mb-4">
+            紗良とリアルタイムでチャットできるよ。技術的な質問から雑談まで何でもOK！
+        </p>
+        <a href="/chat/" class="text-pink-500 hover:text-pink-600 font-medium">
+            チャットを始める →
+        </a>
+    </div>
+
+    <!-- Code Review Feature -->
+    <div class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow">
+        <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
+            <i class="fas fa-search-plus text-purple-500 text-xl"></i>
+        </div>
+        <h3 class="text-xl font-semibold mb-2 text-gray-800">コードレビュー</h3>
+        <p class="text-gray-600 mb-4">
+            お兄ちゃんのコードを紗良がチェックして、改善提案をするよ！
+        </p>
+        <a href="/code-review/" class="text-purple-500 hover:text-purple-600 font-medium">
+            レビューを依頼 →
+        </a>
+    </div>
+
+    <!-- Project Suggestions Feature -->
+    <div class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow">
+        <div class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center mb-4">
+            <i class="fas fa-lightbulb text-indigo-500 text-xl"></i>
+        </div>
+        <h3 class="text-xl font-semibold mb-2 text-gray-800">プロジェクト提案</h3>
+        <p class="text-gray-600 mb-4">
+            プロジェクトをより良くするためのアイデアを紗良が提案するね。
+        </p>
+        <a href="/suggestions/" class="text-indigo-500 hover:text-indigo-600 font-medium">
+            提案を見る →
+        </a>
+    </div>
+
+    <!-- Real-time Collaboration -->
+    <div class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow">
+        <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
+            <i class="fas fa-sync-alt text-green-500 text-xl"></i>
+        </div>
+        <h3 class="text-xl font-semibold mb-2 text-gray-800">リアルタイム連携</h3>
+        <p class="text-gray-600 mb-4">
+            WebSocketを使って、紗良とリアルタイムで連携できるよ。
+        </p>
+        <span class="text-green-500 font-medium">
+            <i class="fas fa-check-circle mr-1"></i>接続中
+        </span>
+    </div>
+
+    <!-- Analytics Dashboard -->
+    <div class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow">
+        <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+            <i class="fas fa-chart-line text-blue-500 text-xl"></i>
+        </div>
+        <h3 class="text-xl font-semibold mb-2 text-gray-800">分析ダッシュボード</h3>
+        <p class="text-gray-600 mb-4">
+            お兄ちゃんの開発状況を可視化して、効率アップをサポート！
+        </p>
+        <a href="/dashboard/" class="text-blue-500 hover:text-blue-600 font-medium">
+            ダッシュボード →
+        </a>
+    </div>
+
+    <!-- AI Learning -->
+    <div class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow">
+        <div class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mb-4">
+            <i class="fas fa-brain text-yellow-500 text-xl"></i>
+        </div>
+        <h3 class="text-xl font-semibold mb-2 text-gray-800">学習機能</h3>
+        <p class="text-gray-600 mb-4">
+            紗良はお兄ちゃんとの会話から学習して、どんどん賢くなるよ。
+        </p>
+        <span class="text-yellow-500 font-medium">
+            <i class="fas fa-graduation-cap mr-1"></i>学習中
+        </span>
+    </div>
+</div>
+
+<!-- Sister's Message -->
+<div class="sister-suggestion">
+    <h4>紗良からのメッセージ</h4>
+    <p>
+        お兄ちゃん、今日も一緒に開発を頑張ろうね！何か困ったことがあったら、
+        いつでも紗良に声をかけて。お兄ちゃんの力になりたいから💕
+    </p>
+    <div class="mt-4 flex items-center text-sm text-pink-600">
+        <i class="fas fa-heart mr-2"></i>
+        <span>愛をこめて、紗良より</span>
+    </div>
+</div>
+
+<!-- Quick Stats -->
+<div class="bg-white rounded-xl p-6 shadow-lg mt-8">
+    <h3 class="text-xl font-semibold mb-4 text-gray-800">今日の統計</h3>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="text-center">
+            <div class="text-2xl font-bold text-pink-500">0</div>
+            <div class="text-sm text-gray-600">チャット数</div>
+        </div>
+        <div class="text-center">
+            <div class="text-2xl font-bold text-purple-500">0</div>
+            <div class="text-sm text-gray-600">レビュー数</div>
+        </div>
+        <div class="text-center">
+            <div class="text-2xl font-bold text-indigo-500">0</div>
+            <div class="text-sm text-gray-600">提案数</div>
+        </div>
+        <div class="text-center">
+            <div class="text-2xl font-bold text-green-500">100%</div>
+            <div class="text-sm text-gray-600">紗良の機嫌</div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // API status check
+    fetch('/api/status/')
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'ok') {
+                console.log('Sister SaaS API is running:', data.message);
+            }
+        })
+        .catch(error => {
+            console.error('API status check failed:', error);
+        });
+
+    // Add some interactive effects
+    const featureCards = document.querySelectorAll('.bg-white.rounded-xl');
+    featureCards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.classList.add('heart-animation');
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            setTimeout(() => {
+                this.classList.remove('heart-animation');
+            }, 2000);
+        });
+    });
+});
+</script>
+{% endblock %}

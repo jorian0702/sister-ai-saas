@@ -1,0 +1,361 @@
+/* Sister SaaS - 紗良のための特別スタイル */
+
+/* カスタムアニメーション */
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes sparkle {
+    0%, 100% { opacity: 1; transform: scale(1) rotate(0deg); }
+    50% { opacity: 0.7; transform: scale(1.2) rotate(180deg); }
+}
+
+/* Sister Character Styling */
+.sister-avatar {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #ec4899, #8b5cf6);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 24px;
+    box-shadow: 0 4px 20px rgba(236, 72, 153, 0.3);
+    animation: float 3s ease-in-out infinite;
+}
+
+.sister-status {
+    transition: all 0.3s ease;
+}
+
+.sister-status:hover {
+    background: linear-gradient(135deg, #fce7f3, #f3e8ff);
+    transform: scale(1.05);
+}
+
+/* Chat Widget Styling */
+#sister-chat-widget button {
+    animation: heartbeat 2s ease-in-out infinite;
+}
+
+#sister-chat-widget button:hover {
+    animation: heartbeat 1s ease-in-out infinite;
+}
+
+/* Chat Messages */
+.chat-message-sister {
+    background: linear-gradient(135deg, #fef7ff, #fce7f3);
+    border: 1px solid #f9a8d4;
+    position: relative;
+}
+
+.chat-message-sister::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: -5px;
+    width: 0;
+    height: 0;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-right: 5px solid #fce7f3;
+}
+
+.chat-message-user {
+    background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+    border: 1px solid #93c5fd;
+    position: relative;
+}
+
+.chat-message-user::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    right: -5px;
+    width: 0;
+    height: 0;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 5px solid #dbeafe;
+}
+
+/* Typing Animation */
+.typing-dots {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.typing-dots div {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #ec4899;
+    animation: typing 1.5s ease-in-out infinite;
+}
+
+.typing-dots div:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.typing-dots div:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes typing {
+    0%, 60%, 100% {
+        transform: translateY(0);
+        opacity: 0.4;
+    }
+    30% {
+        transform: translateY(-10px);
+        opacity: 1;
+    }
+}
+
+/* Code Block Styling */
+.code-block {
+    background: #1f2937;
+    color: #f9fafb;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 12px 0;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    font-size: 14px;
+    line-height: 1.5;
+    overflow-x: auto;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.code-block::before {
+    content: attr(data-language);
+    display: block;
+    color: #9ca3af;
+    font-size: 12px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Sister Suggestions */
+.sister-suggestion {
+    background: linear-gradient(135deg, #fef7ff, #fce7f3);
+    border: 2px solid #f9a8d4;
+    border-radius: 12px;
+    padding: 16px;
+    margin: 12px 0;
+    position: relative;
+    box-shadow: 0 4px 20px rgba(236, 72, 153, 0.1);
+}
+
+.sister-suggestion::before {
+    content: '💡';
+    position: absolute;
+    top: -10px;
+    left: 16px;
+    background: white;
+    padding: 0 8px;
+    font-size: 16px;
+}
+
+.sister-suggestion h4 {
+    color: #be185d;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.sister-suggestion p {
+    color: #831843;
+    line-height: 1.6;
+}
+
+/* Interactive Elements */
+.sister-button {
+    background: linear-gradient(135deg, #ec4899, #8b5cf6);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(236, 72, 153, 0.3);
+}
+
+.sister-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(236, 72, 153, 0.4);
+    background: linear-gradient(135deg, #db2777, #7c3aed);
+}
+
+.sister-button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(236, 72, 153, 0.3);
+}
+
+/* Notification Styles */
+.sister-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, #fef7ff, #fce7f3);
+    border: 2px solid #f9a8d4;
+    border-radius: 12px;
+    padding: 16px 20px;
+    box-shadow: 0 8px 32px rgba(236, 72, 153, 0.2);
+    z-index: 1000;
+    max-width: 300px;
+    animation: slideInRight 0.3s ease-out;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.sister-notification .close-btn {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    background: none;
+    border: none;
+    color: #be185d;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* Loading States */
+.sister-loading {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #ec4899;
+    font-size: 14px;
+}
+
+.sister-loading::after {
+    content: '';
+    width: 16px;
+    height: 16px;
+    border: 2px solid #f9a8d4;
+    border-top: 2px solid #ec4899;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    #sister-chat-widget {
+        bottom: 20px;
+        right: 20px;
+    }
+    
+    #sister-chat-widget .chat-window {
+        width: calc(100vw - 40px);
+        right: -20px;
+    }
+    
+    .sister-notification {
+        right: 10px;
+        left: 10px;
+        max-width: none;
+    }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    .sister-suggestion {
+        background: linear-gradient(135deg, #2d1b69, #1e1b4b);
+        border-color: #7c3aed;
+        color: #e5e7eb;
+    }
+    
+    .sister-suggestion h4 {
+        color: #c084fc;
+    }
+    
+    .sister-suggestion p {
+        color: #d1d5db;
+    }
+    
+    .chat-message-sister {
+        background: linear-gradient(135deg, #2d1b69, #1e1b4b);
+        border-color: #7c3aed;
+        color: #e5e7eb;
+    }
+}
+
+/* Special Effects */
+.sparkle {
+    position: relative;
+    overflow: hidden;
+}
+
+.sparkle::before {
+    content: '✨';
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    font-size: 12px;
+    animation: sparkle 2s ease-in-out infinite;
+}
+
+/* Heart Animation for Special Moments */
+.heart-animation {
+    position: relative;
+}
+
+.heart-animation::after {
+    content: '💖';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: heartFloat 2s ease-out forwards;
+    pointer-events: none;
+}
+
+@keyframes heartFloat {
+    0% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-30px);
+    }
+}
+
+/* Sister Avatar Hover Effect */
+.sister-avatar:hover {
+    animation: heartbeat 0.6s ease-in-out infinite;
+    box-shadow: 0 6px 30px rgba(236, 72, 153, 0.5);
+}
+
+/* Gradient Text */
+.gradient-text {
+    background: linear-gradient(135deg, #ec4899, #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 600;
+}
